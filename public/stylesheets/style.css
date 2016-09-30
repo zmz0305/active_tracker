@@ -1,0 +1,55 @@
+html, body {
+    /*padding: 50px;*/
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100%;
+    /*min-height: 100%;*/
+}
+
+.logoimage {
+    text-decoration: none;
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    float: left;
+    padding-top: 20px;
+}
+
+.itemphoto {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.ccard {
+    textAlign: center;
+    background: white;
+    padding:3px 0px 0px 0px;
+
+}
+
+.available {
+    background: green;
+    height: 100%;
+    verticleAlign: middle;
+}
+
+.unavailable {
+    background: red;
+    height: 100%;
+    verticleAlign: middle;
+}
+
+/*.row {*/
+/*overflow: hidden;*/
+/*!*height: 100%;*!*/
+/*}*/
+
+/*[class*="col-"]{*/
+/*margin-bottom: -99999px;*/
+/*padding-bottom: 99999px;*/
+/*}*/
+
+a {
+    color: #00B7FF;
+}
