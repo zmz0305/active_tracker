@@ -17,33 +17,16 @@ export default class WelcomeScreen extends React.Component {
             'boxShadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
         };
         this.state = {
-            checkoutNumber: 0,
             hello: 'hello'
         }
     }
 
     componentDidMount(){
-        setInterval(()=>{
-            this.initCheckoutNumber();
-        }, 1000)
-    }
 
-    initCheckoutNumber () {
-        var state = this.props.initState;
-        var count = 0;
-        for(var i = 0; i < state.status.length; i++){
-            if(state.status[i]==1){
-                count ++;
-            }
-        }
-        // console.log(this.props.initState);
-        this.setState({checkoutNumber: count});
-        // console.log(this.state.checkoutNumber);
-        return count;
     }
 
     render() {
-        if(this.props.authorized){
+        if(this.props.authorized || this.props.alarm){
             return (
                 <div></div>
             );
@@ -60,8 +43,8 @@ export default class WelcomeScreen extends React.Component {
                                 'marginTop': '20%',
                                 'fontSize': '100px'
                             }}>
-                                {this.state.checkoutNumber}
-                                <span style={{'fontSize': '30%'}}> OF 16</span>
+                                {this.props.checkoutAmount}
+                                <span style={{'fontSize': '30%'}}> OF 8</span>
                             </p>
                             <p style={{'position': 'relative', 'top': '28%', 'fontSize': '40px'}}>CHECKED OUT</p>
                         </div>
