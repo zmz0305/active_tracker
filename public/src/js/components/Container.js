@@ -8,8 +8,14 @@ import Header from './Header';
 import Alarm from './Alarm';
 import Particle from "../../../bower_components/particle-api-js/dist/particle.min";
 import io from 'socket.io-client';
+import {fetchUser} from "../actions/hingeStatusActions"
+import { connect } from "react-redux"
 
-
+@connect((store)=>{
+    return {
+        state: store.hingeState.status
+    }
+})
 export default class Container extends React.Component {
     constructor(props) {
         super(props);
@@ -106,28 +112,6 @@ export default class Container extends React.Component {
             console.log('Alarm turned off');
         }
 
-    }
-
-    renderHelper() {
-        var res = [];
-        if(this.state.alarm){
-            res.push (
-                <Alarm alarm={this.state.alarm} ></Alarm>
-            )
-        }
-        if(!this.state.alarm && !this.state.authorized){
-            res.push (
-                <WelcomeScreen alarm={this.state.alarm} initState={this.state.initState} authorized={this.state.authorized} checkoutAmount={this.state.checkoutAmount}></WelcomeScreen>
-            );
-        }
-        if(this.state.authorized && !this.state.alarm){
-            res.push (
-                <Subcontainer updateCheckoutCount={this.updateCheckoutCount.bind(this)} initState={this.state.initState} authorized={this.state.authorized} user={this.state.user}  trigger={this.alarm.bind(this)}></Subcontainer>
-            )
-        }
-        // console.log(res);
-
-        return res;
     }
 
     render() {
