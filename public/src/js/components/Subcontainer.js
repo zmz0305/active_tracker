@@ -4,14 +4,20 @@
 import React from "react";
 import Card from  './Card';
 import Particle from "../../../bower_components/particle-api-js/dist/particle.min";
+import { connect } from "react-redux"
 
-
+@connect((store)=>{
+    return {
+        cards: store.hingeState.status,
+        checkoutAmount: store.hingeState.checkoutAmount
+    }
+})
 export default class Subcontainer extends React.Component {
     constructor(){
         super();
         this.state = {
-            cards: [],
-            checkoutAmount: 0,
+            // cards: [],
+            // checkoutAmount: 0,
             unauthorized: new Set()
         }
 

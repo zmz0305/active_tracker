@@ -13,7 +13,7 @@ import { connect } from "react-redux"
 
 @connect((store)=>{
     return {
-        state: store.hingeState.status
+        state: store.hingeState
     }
 })
 export default class Container extends React.Component {
