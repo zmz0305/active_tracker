@@ -8,12 +8,13 @@ export default function reducer (state = {
     fetching: false,
     fetched: false,
     err: null,
-    login: false,
+    authorized: false,
     valid_timer: 0,
     alarm: false,
     user: null,
     checkoutAmount: 0
 }, action) {
+
     switch (action.type){
         case "FETCH_STATE": {
             return {...state, fetching: true}
@@ -50,31 +51,30 @@ export default function reducer (state = {
             return ret;
         }
         case "TOOL_REMOVED": {
-            console.log("TOOL_REMOVED");
             let idx = action.payload;
-            let newHinge_status = {...state.status};
+            let newHinge_status = [...state.status];
             let alarm = state.alarm;
             let newUnauthorized = new Set(state.unauthorized);
             newHinge_status[idx].available = false;
-            if(!state.login) {
+            if(!state.authorized) {
                 alarm = true;
                 newUnauthorized.add(idx);
             }
-            return {
+            let ret = {
                 ...state,
                 status: newHinge_status,
                 alarm: alarm,
                 unauthorized:newUnauthorized
             };
+            return ret;
         }
         case "TOOL_RETURNED": {
-            console.log("TOOL_RETURNED");
             let idx = action.payload;
-            let newHinge_status = {...state.status};
+            let newHinge_status = [...state.status];
             let alarm = state.alarm;
             let newUnauthorized = new Set(state.unauthorized);
             newHinge_status[idx].available = true;
-            if(!state.login) {
+            if(!state.authorized) {
                 newUnauthorized.delete(idx);
                 if(newUnauthorized.size == 0){
                     alarm = false;
@@ -84,8 +84,39 @@ export default function reducer (state = {
                 ...state,
                 status: newHinge_status,
                 alarm: alarm,
-                unautorized: newUnauthorized
+                unauthorized: newUnauthorized
             };
+        }
+        case "USER_LOGIN": {
+            let data = action.payload;
+            let alarm = state.alarm;
+            if(! alarm){
+                return {
+                    ...state,
+                    alarm: alarm,
+                    authorized: true,
+                    user: data.user_name,
+                    valid_timer: 2
+                }
+            } else {
+                console.log('Cannot login when alarmed!')
+            }
+        }
+
+        case "TICK": {
+            let time = state.valid_timer - 1;
+            return {
+                ...state,
+                valid_timer: time
+            }
+        }
+
+        case "USER_LOGOUT": {
+            return {
+                ...state,
+                authorized: false,
+                user: null
+            }
         }
     }
     return state;

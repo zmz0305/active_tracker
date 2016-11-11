@@ -3,7 +3,13 @@
  */
 import React from "react";
 import _ from 'lodash'
+import { connect } from "react-redux"
 
+@connect((store) => {
+    return {
+        cards: store.hingeState.status
+    }
+})
 export default class Container extends React.Component {
     constructor(props) {
         super(props);

@@ -2,8 +2,16 @@
  * Created by zmz on 26/09/16.
  */
 import React from "react";
+import { connect } from "react-redux"
 
 
+@connect((store) => {
+    return {
+        checkoutAmount: store.hingeState.checkoutAmount,
+        authorized: store.hingeState.authorized,
+        alarm: store.hingeState.alarm
+    }
+})
 export default class WelcomeScreen extends React.Component {
     constructor(props) {
         super(props);

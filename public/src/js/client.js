@@ -9,5 +9,5 @@ import { Provider } from "react-redux"
 const app = document.getElementById('app');
 {/*ReactDOM.render(<Container/>, app);*/}
 ReactDOM.render(<Provider store={store}>
-    <TestContainer/>
+    <Container/>
     </Provider>, app)

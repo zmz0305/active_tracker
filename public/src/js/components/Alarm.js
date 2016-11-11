@@ -2,7 +2,13 @@
  * Created by zmz on 30/09/16.
  */
 import React from "react";
+import { connect } from "react-redux";
 
+@connect((store) => {
+    return {
+        alarm: store.hingeState.alarm
+    }
+})
 export default class Alarm extends React.Component{
     constructor() {
         super();
